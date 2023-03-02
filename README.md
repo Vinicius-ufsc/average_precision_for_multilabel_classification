@@ -312,10 +312,13 @@ AP = 0.9167, 0.8666, 0.5000, 1.0000
 mAP = 0.8208
 ```
 
-## Lets check with torchmetrics implementation of average precision.
+## Lets check with TorchMetrics and Scikit learn implementations of average precision.
 <br>
 
+>[TorchMetrics](https://torchmetrics.readthedocs.io/en/stable/classification/average_precision.html)
+
 ```python
+import torch
 from torchmetrics.classification import MultilabelAveragePrecision
 
 metric = MultilabelAveragePrecision(num_labels=4, average=None, thresholds=None)
@@ -340,5 +343,36 @@ print(f'mAP: {torch.mean(r).item():.4f}')
 ```
 out:
 AP: tensor([0.9167, 0.8667, 0.5000, 1.0000])
+mAP: 0.8208
+```
+
+>[Scikit learn](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html)
+
+```python
+import torch
+import numpy as np
+from sklearn.metrics import average_precision_score
+
+pred = torch.tensor([[0.8, 0.20, 0.65, 0.90],
+                     [0.3, 0.20, 0.40, 0.85],
+                     [0.2, 0.70, 0.45, 0.85],
+                     [0.1, 0.30, 0.70, 0.95],
+                     [0.7, 0.60, 0.45, 0.80]])
+
+targ = torch.tensor([[1., 0., 1., 0.],
+                     [0., 1., 0., 0.],
+                     [1., 1., 1., 0.],
+                     [0., 0., 0., 1.],
+                     [1., 1., 0., 0.]]).type(torch.int)
+
+r = average_precision_score(targ, pred, average=None)
+
+print(f'AP: {r}')
+print(f'mAP: {np.mean(r).item():.4f}')
+```
+
+```
+out:
+AP: [0.91666667 0.86666667 0.5        1.        ]
 mAP: 0.8208
 ```
