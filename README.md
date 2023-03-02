@@ -4,8 +4,6 @@
 
 > Let's consider a multilabel classification problem with 4 classes (A, B, C, D) and 5 samples (S1, S2, S3, S4, S5).<br>
 The ground truth labels for each sample are given below:
-<br>
-<br>
 
 ## **Targets**
 
@@ -17,10 +15,9 @@ S3 | 1.00| 1.00| 1.00| 0.00|
 S4 | 0.00| 0.00| 0.00| 1.00|
 S5 | 1.00| 1.00| 0.00| 0.00|
 
+<br>
 
 > Now, let's assume that we have a classifier that predicts the following probabilities for each class and each sample:
-<br>
-<br>
 
 ## **Predictions**
 
@@ -143,8 +140,7 @@ R = 1.00
 >Max precisions:   1.00, 1.00, 0.75
 <br>
 
-<figura>
-
+![Git flow](https://github.com/Vinicius-ufsc/average_precision_for_multilabel_classification/blob/main/figure/classA.png?raw=true)
 
 ```python
 AP_class_A = (1*0.66666) + (0.75*(1-0.66666)) = 0.9166575
